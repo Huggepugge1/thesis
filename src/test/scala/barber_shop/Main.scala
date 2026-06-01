@@ -4,11 +4,6 @@ import boc._
 import language.experimental.captureChecking
 import language.experimental.separationChecking
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
-
-import scala.caps.unsafe.unsafeAssumePure
-
 class BarberTest extends munit.FunSuite {
   test("Spawn One") {
     val n = 1
@@ -80,28 +75,3 @@ class BarberTest extends munit.FunSuite {
     Behaviour.awaitall
   }
 }
-
-// class CustomFile(filename: String) extends scala.caps.Mutable {
-//   update def close() = ???
-//   update def write(str: String) = ???
-//   def read = ???
-// }
-//
-// def usingFile[T](filename: String, op: CustomFile^ => T): T = {
-//   val file = CustomFile(filename)
-//   val result = op(file)
-//   file.close()
-//   result
-// }
-//
-// var file: CustomFile^ = null
-//
-// def saferFuture[T](op: ->{caps.any.rd} T): Future[T] = Future { unsafeAssumePure(op) }
-//
-// def foo() = {
-//   usingFile("Hello.txt", f =>
-//     saferFuture {
-//       f.write("This should not compile")
-//     }
-//   )
-// }

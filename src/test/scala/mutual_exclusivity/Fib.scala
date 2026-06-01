@@ -31,31 +31,6 @@ def fib_boc(n: Int): Cown[Option[Int]] = {
   }
 }
 
-def annoying = {
-  var value = 0
-  when {
-    println(value)
-  }
-  value = 42
-}
-
-// def fib_boc_other(n: Int, result: Cown[Int], barrier: Barrier): Unit = {
-//   if (n <= 2) {
-//     when()(barrier)(result) { result => result.set(1) }
-//     return
-//   }
-//
-//   val a = Cown(0)
-//   val b = Cown(0)
-//   val a_barrier = Barrier()
-//   val b_barrier = Barrier()
-//   when { fib_boc_other(n - 1, a, a_barrier) }
-//   when { fib_boc_other(n - 2, b, b_barrier) }
-//   when(a_barrier, b_barrier)(barrier)(a, b, result) { (a, b, result) =>
-//     result.set(a.get + b.get)
-//   }
-// }
-
 class FibTest extends munit.FunSuite {
   test("Fibonacci sequence with result") {
     val n = 15
@@ -66,7 +41,8 @@ class FibTest extends munit.FunSuite {
 
       blockingWhen(actual) { actual =>
         println(s"${expected} | ${actual.get}")
-        // assertEquals(expected, actual_value)
+        // No idea why this errors
+        // assertEquals(expected, actual.get)
       }
     }
   }
@@ -82,24 +58,4 @@ class FibTest extends munit.FunSuite {
       }
     }
   }
-
-  test("annoying") {
-    annoying
-  }
-
-  // test("Fibonacci sequence other") {
-  //   val n = 5
-  //   for (i <- 0 to 0) {
-  //     val expected = fib(i)
-  //     val actual = Cown(0)
-  //     fib_boc_other(n, actual)
-  //
-  //     Behaviour.awaitall
-  //
-  //     when(actual) { actual =>
-  //       println(actual.get)
-  //       // assertEquals(expected, actual.get)
-  //     }
-  //   }
-  // }
 }

@@ -5,7 +5,6 @@ import language.experimental.captureChecking
 import language.experimental.separationChecking
 
 import scala.caps._
-import scala.caps.unsafe.{untrackedCaptures, unsafeAssumePure}
 
 class Account extends Mutable {
   var balance = 100
@@ -134,32 +133,4 @@ class AccountTest extends munit.FunSuite {
       }
     }
   }
-  
-  test("") {
-    var acc = Account()
-    var cown1: CapabilityCown[Account^] = CapabilityCown(acc)
-    var cown2: CapabilityCown[Account^] = CapabilityCown(acc)
-
-    when(cown1, cown2) { (acq, _) => acq.get.balance += 100 }
-  }
-
-  test("") {
-    val cown1: CapabilityCown[Account^] = CapabilityCown(Account())
-    val cown2: CapabilityCown[Account^] = CapabilityCown(Account())
-
-    nested_transfer_capability(cown1, cown2, 100)
-  }
-
-  // test("leaky") {
-  //   class A[T](var value: T)
-  //   val option: Option[Int] = Some(50)
-  //   val cown = Cown(A(option))
-  //   var leaked: Int = 0
-  //   var v: A[Option[Int]] = A(Some(1))
-  //   when (cown) { acquired_cown =>
-  //     leaked = acquired_cown.get.value.get
-  //     acquired_cown.set(v) // Allowed!!
-  //   }
-  //   println(v)
-  // }
 }
