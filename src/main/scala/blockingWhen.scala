@@ -44,8 +44,8 @@ def blockingWhen[
   C1, CC1^,
   C2, CC2^,
 ](
-  cown1: Cown[C1^{CC1}],
-  cown2: Cown[C2^{CC2}],
+  cown1: Cown[C1^{CC1}]^,
+  cown2: Cown[C2^{CC2}]^,
 )(thunk:
   (
     AcquiredCown[C1^{CC1}]^,
@@ -69,24 +69,24 @@ def blockingWhen[
  */
 def blockingWhen[
   T,
-  C1,
-  C2,
-  C3,
+  C1, CC1^,
+  C2, CC2^,
+  C3, CC3^,
 ](
-  cown1: Cown[C1],
-  cown2: Cown[C2],
-  cown3: Cown[C3],
+  cown1: Cown[C1^{CC1}]^,
+  cown2: Cown[C2^{CC2}]^,
+  cown3: Cown[C3^{CC3}]^,
 )(thunk:
   (
-    AcquiredCown[C1]^,
-    AcquiredCown[C2]^,
-    AcquiredCown[C3]^,
+    AcquiredCown[C1^{CC1}]^,
+    AcquiredCown[C2^{CC2}]^,
+    AcquiredCown[C3^{CC3}]^,
   ) ->{caps.any.rd} T): Cown[Option[T]] = {
   blockingWhenSchedule(
     Seq(
-      cown1,
-      cown2,
-      cown3,
+      unsafeAssumePure(cown1),
+      unsafeAssumePure(cown2),
+      unsafeAssumePure(cown3),
     ),
     thunk(
       cown1.acquire,
@@ -102,28 +102,28 @@ def blockingWhen[
  */
 def blockingWhen[
   T,
-  C1,
-  C2,
-  C3,
-  C4,
+  C1, CC1^,
+  C2, CC2^,
+  C3, CC3^,
+  C4, CC4^,
 ](
-  cown1: Cown[C1],
-  cown2: Cown[C2],
-  cown3: Cown[C3],
-  cown4: Cown[C4],
+  cown1: Cown[C1^{CC1}]^,
+  cown2: Cown[C2^{CC2}]^,
+  cown3: Cown[C3^{CC3}]^,
+  cown4: Cown[C4^{CC4}]^,
 )(thunk:
   (
-    AcquiredCown[C1]^,
-    AcquiredCown[C2]^,
-    AcquiredCown[C3]^,
-    AcquiredCown[C4]^,
+    AcquiredCown[C1^{CC1}]^,
+    AcquiredCown[C2^{CC2}]^,
+    AcquiredCown[C3^{CC3}]^,
+    AcquiredCown[C4^{CC4}]^,
   ) ->{caps.any.rd} T): Cown[Option[T]] = {
   blockingWhenSchedule(
     Seq(
-      cown1,
-      cown2,
-      cown3,
-      cown4,
+      unsafeAssumePure(cown1),
+      unsafeAssumePure(cown2),
+      unsafeAssumePure(cown3),
+      unsafeAssumePure(cown4),
     ),
     thunk(
       cown1.acquire,
@@ -140,32 +140,32 @@ def blockingWhen[
  */
 def blockingWhen[
   T,
-  C1,
-  C2,
-  C3,
-  C4,
-  C5,
+  C1, CC1^,
+  C2, CC2^,
+  C3, CC3^,
+  C4, CC4^,
+  C5, CC5^,
 ](
-  cown1: Cown[C1],
-  cown2: Cown[C2],
-  cown3: Cown[C3],
-  cown4: Cown[C4],
-  cown5: Cown[C5],
+  cown1: Cown[C1^{CC1}]^,
+  cown2: Cown[C2^{CC2}]^,
+  cown3: Cown[C3^{CC3}]^,
+  cown4: Cown[C4^{CC4}]^,
+  cown5: Cown[C5^{CC5}]^,
 )(thunk:
   (
-    AcquiredCown[C1]^,
-    AcquiredCown[C2]^,
-    AcquiredCown[C3]^,
-    AcquiredCown[C4]^,
-    AcquiredCown[C5]^,
+    AcquiredCown[C1^{CC1}]^,
+    AcquiredCown[C2^{CC2}]^,
+    AcquiredCown[C3^{CC3}]^,
+    AcquiredCown[C4^{CC4}]^,
+    AcquiredCown[C5^{CC5}]^,
   ) ->{caps.any.rd} T): Cown[Option[T]] = {
   blockingWhenSchedule(
     Seq(
-      cown1,
-      cown2,
-      cown3,
-      cown4,
-      cown5,
+      unsafeAssumePure(cown1),
+      unsafeAssumePure(cown2),
+      unsafeAssumePure(cown3),
+      unsafeAssumePure(cown4),
+      unsafeAssumePure(cown5),
     ),
     thunk(
       cown1.acquire,
